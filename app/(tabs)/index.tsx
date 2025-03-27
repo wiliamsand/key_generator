@@ -1,9 +1,27 @@
 import { useState } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native'
 import Slider from '@react-native-community/slider'
+import ModalPassword from '@/components/modal'
+import * as Clipboard from 'expo-clipboard'
 
 export default function Index() {
   const [size, setSize] = useState(18)
+  const [password, setPassword] = useState('')
+  const [modalVisible, setModalVisible] = useState(false)
+
+  async function generatePassword() {
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()_+'
+    let password = ''
+
+    for (let i = 0; i < size; i++) {
+      const randomPos = Math.floor(Math.random() * charset.length)
+      password += charset[randomPos]
+    }
+
+    setPassword(password)
+    setModalVisible(true)
+    await Clipboard.setStringAsync(password)
+  }
 
   return (
     <View style={styles.container}>
@@ -25,9 +43,14 @@ export default function Index() {
         />
       </View>
 
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={generatePassword}>
         <Text style={styles.btnText}>Gerar senha</Text>
       </TouchableOpacity>
+
+      <Modal visible={modalVisible} animationType='fade' transparent={true}>
+        <ModalPassword password={password} handleClose={() => setModalVisible(false)} />
+      </Modal>
+
     </View>
 
   )
