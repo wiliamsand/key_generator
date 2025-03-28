@@ -20,7 +20,7 @@
     "@react-native-community/slider": "4.5.5",
     "@react-navigation/bottom-tabs": "^7.3.3",
     "@react-navigation/native": "^7.0.19",
-    "expo": "~52.0.40",
+    "expo": "~52.0.41",
     "expo-blur": "~14.0.3",
     "expo-clipboard": "~7.0.1",
     "expo-constants": "~17.0.8",
