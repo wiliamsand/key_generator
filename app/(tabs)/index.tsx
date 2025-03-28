@@ -64,7 +64,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   logo: {
-    marginBottom: 50
+    marginBottom: 50,
+    width: 200,
+    height: 200
   },
   caracteres: {
     fontWeight: 'bold',
